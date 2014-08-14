@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+'use strict';
+
+var path = require('path'),
+    lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib'),
+    require(lib + '/main.js');

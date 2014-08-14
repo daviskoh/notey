@@ -1,0 +1,30 @@
+{
+  "name": "notey",
+  "version": "0.0.0",
+  "description": "Note tracker command line utility inspired by Rails Rake Notes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/daviskoh/notey.git"
+  },
+  "keywords": [
+    "rails",
+    "rake",
+    "notes",
+    "node",
+    "npm"
+  ],
+  "author": "koh.davis.0@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daviskoh/notey/issues"
+  },
+  "homepage": "https://github.com/daviskoh/notey",
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "should": "^4.0.4"
+  }
+}
