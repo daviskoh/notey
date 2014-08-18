@@ -4,6 +4,16 @@ var formatter = require('../lib/formatter'),
     should = require('should');
 
 describe('formatter', function() {
+    it('exists', function(done) {
+        formatter.should.be.ok;
+        done();
+    });
+
+    it('is a object', function(done) {
+        formatter.should.be.type('object');
+        done();
+    });
+    
     describe('formatter.header', function() {
         var header = 'my-file.js';
 
@@ -16,16 +26,6 @@ describe('formatter', function() {
             formatter.header(header).should.be.exactly(header + ':');
             done();
         });
-    });
-
-    it('exists', function(done) {
-        formatter.should.be.ok;
-        done();
-    });
-
-    it('is a object', function(done) {
-        formatter.should.be.type('object');
-        done();
     });
 
     describe('formatter.line', function() {
