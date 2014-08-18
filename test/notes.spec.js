@@ -3,72 +3,85 @@
 var notes = require('../lib/notes'),
     formatter = require('../lib/formatter'),
     should = require('should'),
-    sinon = require('sinon');
+    sinon = require('sinon'),
+    fs = require('fs');
 
 describe('notes', function() {
     var mockCWD = process.cwd() + '/test/mock_data/';
 
-    beforeEach(function() {
-        // begin spying on console.log
-        sinon.spy(console, 'log');
-    });
+    function checkOutputTodos(todos) {
+        var expectedOutput = todos.join('\n');
 
-    afterEach(function() {
-        console.log.restore();
-    });
+        return function(done) {
+            console.log.calledWith(expectedOutput).should.be.true;
+
+            done();
+        };
+    }
 
     it('exists', function(done) {
         notes.should.be.ok;
         done();
     });
 
-    it('is a function', function(done) {
-        notes.should.be.type('function');
+    it('is a object', function(done) {
+        notes.should.be.type('object');
         done();
     });
 
-    describe('single file', function() {
+    describe('notes.retrieveTodos', function() {
         var fileName = 'single-file.js',
             header = formatter.header(mockCWD + fileName),
             todo1 = formatter.line('    // TODO: get rid of return statement', 12),
             todo2 = formatter.line('    // TODO: optimize for loop', 20);
 
-        beforeEach(function() {
-            notes(mockCWD + fileName);
-        });
+        it('should be a function', function(done) {
+            notes.retrieveTodos.should.be.type('function');
 
-        it('outputs header', function(done) {
-            console.log.calledWith(header).should.be.true;
             done();
         });
 
-        // TODO: make specs more dynamic
-        it('outputs 1st TODO', function(done) {
-            console.log.calledWith(todo1).should.be.true;
-            done();
-        });
+        it('should take a file and return an array of its TODOs', function(done) {
+            var expectedTodos = [todo1, todo2];
 
-        it('outputs 2nd TODO', function(done) {
-            console.log.calledWith(todo2).should.be.true;
+            notes.retrieveTodos(mockCWD + fileName).should.eql(expectedTodos);
+
             done();
         });
     });
 
-    describe('single directory', function() {
-        var directoryName = 'one-directory-one-file/',
-            fileName = 'dat-factory-service.js',
-            header = formatter.header(mockCWD + directoryName + fileName);
+    describe('notes.outputNotes', function() {
+        var fileName, directoryName, expectedFormat;
 
-        beforeEach(function() {
-            notes(mockCWD + directoryName + fileName);
+        it('should handle a single file', function(done) {
+            fileName = 'single-file.js';
+
+            expectedFormat = [
+                formatter.header(mockCWD + fileName),
+                formatter.line('// TODO: get rid of return statement', 12),
+                formatter.line('// TODO: optimize for loop', 20)
+            ].join('\n');
+
+            notes.outputNotes(mockCWD + fileName).should.be.eql(expectedFormat);
+
+            done();
         });
 
-        describe('single file', function() {
-            it('outputs header', function(done) {
-                console.log.calledWith(header).should.be.true;
+        it('should handle a single directory with a single file', function(done) {
+            fileName = 'dat-factory-service.js',
+            directoryName = 'one-directory-one-file/';
 
-                done();
-            });
+            expectedFormat = [
+                formatter.header(mockCWD + directoryName + fileName),
+                formatter.line('// TODO: have factory do something', 13),
+                formatter.line('// TODO: change call to use https', 17),
+                formatter.line('// TODO: use isolate scope', 31),
+                formatter.line('// TODO: write some logic', 34)
+            ].join('\n');
+
+            notes.outputNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
+
+            done();
         });
     });
 });
