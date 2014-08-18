@@ -1,14 +1,20 @@
 'use strict';
 
 var notes = require('../lib/notes'),
+    formatter = require('../lib/formatter'),
     should = require('should'),
     sinon = require('sinon');
 
 describe('notes', function() {
-    var mockCWD = process.cwd() + '/test/mock_data';
+    var mockCWD = process.cwd() + '/test/mock_data/';
 
     beforeEach(function() {
         // begin spying on console.log
+        sinon.spy(console, 'log');
+    });
+
+    afterEach(function() {
+        console.log.restore();
     });
 
     it('exists', function(done) {
@@ -21,11 +27,30 @@ describe('notes', function() {
         done();
     });
 
-    xit('outputs all TODOs of a file', function(done) {
-        var expectedOutput = 'single-file.js:\n  [ Line 12 ] TODO: get rid of return statement\n  [ Line 20 ] TODO: optimize for loop';
+    describe('a single file', function() {
+        var fileName = 'single-file.js',
+            header = mockCWD + fileName + ':',
+            todo1 = formatter('    // TODO: get rid of return statement', 12),
+            todo2 = formatter('    // TODO: optimize for loop', 20);
 
-        // expect console.log to have been called w/ above
+        beforeEach(function() {
+            notes(mockCWD + fileName);
+        });
 
-        done();
+        it('outputs header', function(done) {
+            console.log.calledWith(header).should.be.true;
+            done();
+        });
+
+        // TODO: make specs more dynamic
+        it('outputs 1st TODO', function(done) {
+            console.log.calledWith(todo1).should.be.true;
+            done();
+        });
+
+        it('outputs 2nd TODO', function(done) {
+            console.log.calledWith(todo2).should.be.true;
+            done();
+        });
     });
 });
