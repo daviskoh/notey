@@ -27,7 +27,7 @@ describe('notes', function() {
         done();
     });
 
-    describe('a single file', function() {
+    describe('single file', function() {
         var fileName = 'single-file.js',
             header = formatter.header(mockCWD + fileName),
             todo1 = formatter.line('    // TODO: get rid of return statement', 12),
@@ -51,6 +51,24 @@ describe('notes', function() {
         it('outputs 2nd TODO', function(done) {
             console.log.calledWith(todo2).should.be.true;
             done();
+        });
+    });
+
+    describe('single directory', function() {
+        var directoryName = 'one-directory-one-file/',
+            fileName = 'dat-factory-service.js',
+            header = formatter.header(mockCWD + directoryName + fileName);
+
+        beforeEach(function() {
+            notes(mockCWD + directoryName + fileName);
+        });
+
+        describe('single file', function() {
+            it('outputs header', function(done) {
+                console.log.calledWith(header).should.be.true;
+
+                done();
+            });
         });
     });
 });
