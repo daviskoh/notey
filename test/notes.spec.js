@@ -11,17 +11,17 @@ describe('notes', function() {
         // begin spying on console.log
     });
 
-    it('exists', function (done) {
+    it('exists', function(done) {
         notes.should.be.ok;
         done();
     });
 
-    it('is a function', function (done) {
+    it('is a function', function(done) {
         notes.should.be.type('function');
         done();
     });
 
-    it('outputs all TODOs of a file', function (done) {
+    xit('outputs all TODOs of a file', function(done) {
         var expectedOutput = 'single-file.js:\n  [ Line 12 ] TODO: get rid of return statement\n  [ Line 20 ] TODO: optimize for loop';
 
         // expect console.log to have been called w/ above
