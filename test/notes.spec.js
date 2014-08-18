@@ -50,7 +50,7 @@ describe('notes', function() {
         });
     });
 
-    describe('notes.outputNotes', function() {
+    describe('notes.allNotes', function() {
         var fileName, directoryName, expectedFormat;
 
         it('should handle a single file', function(done) {
@@ -62,7 +62,7 @@ describe('notes', function() {
                 formatter.line('// TODO: optimize for loop', 20)
             ].join('\n');
 
-            notes.outputNotes(mockCWD + fileName).should.be.eql(expectedFormat);
+            notes.allNotes(mockCWD + fileName).should.be.eql(expectedFormat);
 
             done();
         });
@@ -79,7 +79,7 @@ describe('notes', function() {
                 formatter.line('// TODO: write some logic', 34)
             ].join('\n');
 
-            notes.outputNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
+            notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
 
             done();
         });
