@@ -29,9 +29,9 @@ describe('notes', function() {
 
     describe('a single file', function() {
         var fileName = 'single-file.js',
-            header = mockCWD + fileName + ':',
-            todo1 = formatter('    // TODO: get rid of return statement', 12),
-            todo2 = formatter('    // TODO: optimize for loop', 20);
+            header = formatter.header(mockCWD + fileName),
+            todo1 = formatter.line('    // TODO: get rid of return statement', 12),
+            todo2 = formatter.line('    // TODO: optimize for loop', 20);
 
         beforeEach(function() {
             notes(mockCWD + fileName);
