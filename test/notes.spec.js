@@ -34,16 +34,16 @@ describe('notes', function() {
     });
 
     describe('notes.retrieveTodos', function() {
-        var fileName = 'single-file.js',
+        var fileName = 'sample-file.go',
             header = formatter.header(mockCWD + fileName),
-            todo1 = formatter.line('    // TODO: get rid of return statement', 12),
-            todo2 = formatter.line('    // TODO: optimize for loop', 20);
+            todo1 = formatter.line('// TODO: add arg & return it', 7),
+            todo2 = formatter.line('// TODO: add more things', 14);
 
         it('is a function', function() {
             notes.retrieveTodos.should.be.type('function');
         });
 
-        it('should take a file and return an array of its TODOs', function() {
+        it('should take a file and return an array of only valid TODOs', function() {
             var expectedTodos = [todo1, todo2];
 
             notes.retrieveTodos(mockCWD + fileName).should.eql(expectedTodos);
@@ -121,7 +121,7 @@ describe('notes', function() {
 
         it('should handle a directory with 1 file & 1 directory that contains 1 file', function() {
             var file1Name = 'my-thing-service.js',
-                file2Name = 'core.scss';
+                file2Name = 'one-file/core.scss';
 
             directoryName = 'one-file-one-dir-one-file/';
 
@@ -132,7 +132,7 @@ describe('notes', function() {
             ].join('\n');
 
             var file2Notes = [
-                formatter.header(mockCWD + directoryName + 'one-file/' + file2Name),
+                formatter.header(mockCWD + directoryName + file2Name),
                 formatter.line('// TODO: create new sass file', 1),
                 formatter.line('// TODO: use sass vars', 12),
                 formatter.line('// TODO: add some border-radius', 23)
@@ -146,7 +146,22 @@ describe('notes', function() {
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
 
+        // TODO: look into generating test dirs & files randomly using yeoman generator
+        // manually inputting all TODOs
         xit('should handle a directory with multiple files & multiple directories that contain multiple files', function() {
+            var file1Name = 'index.html',
+                file2Name = 'useless.html',
+                file3Name = 'app/app.js',
+                file4Name = 'app/init.js',
+                file5Name = 'app/controller/main-controller.js',
+                file6Name = 'app/controller/main-controller.spec.js',
+                file7Name = 'app/styles/core.scss',
+                file8Name = 'app/styles/_another-external.scss',
+                file9Name = 'app/styles/_external.scss',
+                file10Name = 'app/styles/coolness/coolness.scss';
+
+            directoryName = 'multi-files-multi-dirs-multi-files';
+
 
         });
     });
