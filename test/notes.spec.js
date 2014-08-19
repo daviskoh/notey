@@ -83,5 +83,9 @@ describe('notes', function() {
 
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
+
+        xit('should handle a single directory with multiple files', function() {
+            
+        });
     });
 });
