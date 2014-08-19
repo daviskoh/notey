@@ -1,0 +1,27 @@
+// TODO: create new sass file
+@import "stuff.scss";
+
+html {
+  height: 100%;
+}
+
+a {
+    color: red
+
+    &:hover {
+        // TODO: use sass vars
+        color: blue
+    }
+}
+
+.header {
+    padding-bottom: 30px;
+}
+
+.alert {
+    padding: 10px;
+    // TODO: add some border-radius
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}

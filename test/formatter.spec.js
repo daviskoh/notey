@@ -22,6 +22,14 @@ describe('formatter', function() {
         it('should format a header', function() {
             formatter.header(header).should.be.exactly(header + ':');
         });
+
+        it('should remove any duplicate forward slashes', function() {
+            var expected = 'directory/ello-dude/homie/bro.js:';
+
+            formatter.header('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
+            formatter.header('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
+            formatter.header('directory//ello-dude////homie/bro.js').should.be.exactly(expected);
+        });
     });
 
     describe('formatter.line', function() {
