@@ -123,7 +123,7 @@ describe('notes', function() {
             var file1Name = 'my-thing-service.js',
                 file2Name = 'core.scss';
 
-            directoryName = 'one-file-one-directory-one-file/';
+            directoryName = 'one-file-one-dir-one-file/';
 
             var file1Notes = [
                 formatter.header(mockCWD + directoryName + file1Name),

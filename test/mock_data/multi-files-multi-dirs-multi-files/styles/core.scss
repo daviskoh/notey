@@ -1,0 +1,27 @@
+@import "_external.scss";
+@import "_another-external.scss";
+@import "coolness/coolness.scss";
+
+html {
+  height: 100%;
+}
+
+a {
+    color: red
+
+    &:hover {
+        color: blue
+    }
+}
+
+// TODO: remove
+.header {
+    padding-bottom: 50px;
+}
+
+/* TODO: add some border-radius */ .alert {
+    padding: 10px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}

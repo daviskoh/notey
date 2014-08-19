@@ -1,0 +1,9 @@
+body {
+    font-family: 'Oswald', sans-serif;
+    padding: 0;
+    margin: 0;
+    // TODO: reduce to 80%
+    width: 100%;
+    background: lighten(#00628B, 10%); // TODO: make darker
+    overflow-x: hidden;
+}

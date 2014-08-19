@@ -1,0 +1,10 @@
+div {
+    & p {
+        padding: 30px;
+    }
+
+    // TODO: change to blue
+    & a {
+        color: green;
+    }
+}
