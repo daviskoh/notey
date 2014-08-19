@@ -9,11 +9,11 @@ describe('formatter', function() {
         done();
     });
 
-    it('is a object', function(done) {
+    it('is an object', function(done) {
         formatter.should.be.type('object');
         done();
     });
-    
+
     describe('formatter.header', function() {
         var header = 'my-file.js';
 

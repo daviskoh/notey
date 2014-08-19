@@ -9,24 +9,28 @@ var notes = require('../lib/notes'),
 describe('notes', function() {
     var mockCWD = process.cwd() + '/test/mock_data/';
 
-    function checkOutputTodos(todos) {
-        var expectedOutput = todos.join('\n');
-
-        return function(done) {
-            console.log.calledWith(expectedOutput).should.be.true;
-
-            done();
-        };
-    }
-
-    it('exists', function(done) {
+    it('exists', function() {
         notes.should.be.ok;
-        done();
     });
 
-    it('is a object', function(done) {
+    it('is an object', function() {
         notes.should.be.type('object');
-        done();
+    });
+
+    describe('notes.containsNote', function() {
+        it('is a function', function() {
+            notes.containsNote.should.be.type('function');
+        });
+
+        it('checks a string for any key words specified in the key-words.json file', function() {
+            notes.containsNote('function doThangs() { // TODO: ello').should.be.true;
+            notes.containsNote('function doThangs() { // TOD: ello').should.be.false;
+        });
+
+        it('is case sensitive', function() {
+            notes.containsNote('function doThangs() { // todo: ello').should.be.false;
+            notes.containsNote('function doThangs() { // Todo: ello').should.be.false;
+        });
     });
 
     describe('notes.retrieveTodos', function() {
@@ -35,25 +39,25 @@ describe('notes', function() {
             todo1 = formatter.line('    // TODO: get rid of return statement', 12),
             todo2 = formatter.line('    // TODO: optimize for loop', 20);
 
-        it('should be a function', function(done) {
+        it('is a function', function() {
             notes.retrieveTodos.should.be.type('function');
-
-            done();
         });
 
-        it('should take a file and return an array of its TODOs', function(done) {
+        it('should take a file and return an array of its TODOs', function() {
             var expectedTodos = [todo1, todo2];
 
             notes.retrieveTodos(mockCWD + fileName).should.eql(expectedTodos);
-
-            done();
         });
     });
 
     describe('notes.allNotes', function() {
         var fileName, directoryName, expectedFormat;
 
-        it('should handle a single file', function(done) {
+        it('is a function', function() {
+            notes.allNotes.should.be.type('function');
+        });
+
+        it('should handle a single file', function() {
             fileName = 'single-file.js';
 
             expectedFormat = [
@@ -63,11 +67,9 @@ describe('notes', function() {
             ].join('\n');
 
             notes.allNotes(mockCWD + fileName).should.be.eql(expectedFormat);
-
-            done();
         });
 
-        it('should handle a single directory with a single file', function(done) {
+        it('should handle a single directory with a single file', function() {
             fileName = 'dat-factory-service.js',
             directoryName = 'one-directory-one-file/';
 
@@ -80,8 +82,6 @@ describe('notes', function() {
             ].join('\n');
 
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
-
-            done();
         });
     });
 });
