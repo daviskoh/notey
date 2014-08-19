@@ -119,11 +119,31 @@ describe('notes', function() {
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
 
-        xit('should handle a directory with 1 file & 1 directory that contains 1 file', function() {
+        it('should handle a directory with 1 file & 1 directory that contains 1 file', function() {
             var file1Name = 'my-thing-service.js',
                 file2Name = 'core.scss';
 
             directoryName = 'one-file-one-directory-one-file/';
+
+            var file1Notes = [
+                formatter.header(mockCWD + directoryName + file1Name),
+                formatter.line('// TODO: inject some more dependencies', 13),
+                formatter.line('// TODO: do some cooler stuff', 16)
+            ].join('\n');
+
+            var file2Notes = [
+                formatter.header(mockCWD + directoryName + 'one-file/' + file2Name),
+                formatter.line('// TODO: create new sass file', 1),
+                formatter.line('// TODO: use sass vars', 12),
+                formatter.line('// TODO: add some border-radius', 23)
+            ].join('\n');
+
+            expectedFormat = [
+                file1Notes,
+                file2Notes
+            ].join('\n\n');
+
+            notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
     });
 });
