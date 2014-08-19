@@ -41,14 +41,14 @@ describe('formatter', function() {
 
         it('formats a string properly given a line number', function() {
             givenString = 'TODO: update client-side Session model to overwrite toJSON',
-            expectedString = '  * [Line 8] [TODO] update client-side Session model to overwrite toJSON';
+            expectedString = '  * [Line   8] [TODO] update client-side Session model to overwrite toJSON';
 
             formatter.line(givenString, 8).should.be.exactly(expectedString);
         });
 
         it('ignores code prefacing code', function() {
             givenString = '[1, 2, 3].forEach(function(number) { // TODO: declare new var & replace hard-coded',
-            expectedString = '  * [Line 11] [TODO] declare new var & replace hard-coded';
+            expectedString = '  * [Line  11] [TODO] declare new var & replace hard-coded';
 
             formatter.line(givenString, 11).should.be.exactly(expectedString);
         });

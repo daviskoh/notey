@@ -145,5 +145,9 @@ describe('notes', function() {
 
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
+
+        xit('should handle a directory with multiple files & multiple directories that contain multiple files', function() {
+
+        });
     });
 });
