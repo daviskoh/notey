@@ -69,9 +69,9 @@ describe('notes', function() {
             notes.allNotes(mockCWD + fileName).should.be.eql(expectedFormat);
         });
 
-        it('should handle a single directory with a single file', function() {
+        it('should handle a directory with a single file', function() {
             fileName = 'dat-factory-service.js',
-            directoryName = 'one-directory-one-file/';
+            directoryName = 'directory-one-file/';
 
             expectedFormat = [
                 formatter.header(mockCWD + directoryName + fileName),
@@ -84,12 +84,12 @@ describe('notes', function() {
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
 
-        it('should handle a single directory with multiple files', function() {
+        it('should handle a directory with multiple files', function() {
             var file1Name = 'app.js',
                 file2Name = 'main-controller.js',
                 file3Name = 'main-controller.spec.js';
             
-            directoryName = 'one-directory-multi-files/';
+            directoryName = 'directory-multi-files/';
 
             var file1Notes = [
                 formatter.header(mockCWD + directoryName + file1Name),
