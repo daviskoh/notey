@@ -97,12 +97,12 @@ describe('notes', function() {
                 formatter.line('* TODO: add more headers and stuff', 13),
                 formatter.line('// TODO: add some useless resolves', 28),
                 formatter.line('// TODO: fallback to something dumb', 39),
-            ].join('\n').concat('\n\n');
+            ].join('\n');
 
             var file2Notes = [
                 formatter.header(mockCWD + directoryName + file2Name),
                 formatter.line('TODO: make var more descriptive', 14)
-            ].join('\n').concat('\n\n');
+            ].join('\n');
 
             var file3Notes = [
                 formatter.header(mockCWD + directoryName + file3Name),
@@ -110,7 +110,13 @@ describe('notes', function() {
                 formatter.line('TODO: add more specs', 33)
             ].join('\n');
 
-            notes.allNotes(mockCWD + directoryName).should.be.eql(file1Notes + file2Notes + file3Notes);
+            expectedFormat = [
+                file1Notes,
+                file2Notes,
+                file3Notes
+            ].join('\n\n');
+
+            notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
     });
 });
