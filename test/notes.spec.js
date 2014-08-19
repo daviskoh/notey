@@ -84,8 +84,33 @@ describe('notes', function() {
             notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
 
-        xit('should handle a single directory with multiple files', function() {
+        it('should handle a single directory with multiple files', function() {
+            var file1Name = 'app.js',
+                file2Name = 'main-controller.js',
+                file3Name = 'main-controller.spec.js';
             
+            directoryName = 'one-directory-multi-files/';
+
+            var file1Notes = [
+                formatter.header(mockCWD + directoryName + file1Name),
+                formatter.line('// TODO: need more mods dude', 4),
+                formatter.line('* TODO: add more headers and stuff', 13),
+                formatter.line('// TODO: add some useless resolves', 28),
+                formatter.line('// TODO: fallback to something dumb', 39),
+            ].join('\n').concat('\n\n');
+
+            var file2Notes = [
+                formatter.header(mockCWD + directoryName + file2Name),
+                formatter.line('TODO: make var more descriptive', 14)
+            ].join('\n').concat('\n\n');
+
+            var file3Notes = [
+                formatter.header(mockCWD + directoryName + file3Name),
+                formatter.line('// TODO: add more things', 5),
+                formatter.line('TODO: add more specs', 33)
+            ].join('\n');
+
+            notes.allNotes(mockCWD + directoryName).should.be.eql(file1Notes + file2Notes + file3Notes);
         });
     });
 });
