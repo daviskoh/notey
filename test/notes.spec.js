@@ -3,7 +3,6 @@
 var notes = require('../lib/notes'),
     formatter = require('../lib/formatter'),
     should = require('should'),
-    sinon = require('sinon'),
     fs = require('fs');
 
 describe('notes', function() {
