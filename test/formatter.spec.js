@@ -71,8 +71,11 @@ describe('formatter', function() {
             formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
         });
 
-        xit('allows for punctuation', function() {
-            
+        it('allows for punctuation', function() {
+            givenString = '<!-- TODO: hey there! -->',
+            expectedString = '  * [Line  21] [TODO] hey there!';
+
+            formatter.line(givenString, 21).should.be.exactly(expectedString);
         });
     });
 });
