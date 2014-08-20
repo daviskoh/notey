@@ -12,15 +12,15 @@ describe('formatter', function() {
         formatter.should.be.type('object');
     });
 
-    describe('formatter.removeRecuringSlashes', function() {
+    describe('formatter.path', function() {
         var expected = '/aaaa/'
 
         it('removes duplicate trialing forward slashes', function() {
-            formatter.removeRecuringSlashes('/aaaa//').should.be.exactly('/aaaa/');
+            formatter.path('/aaaa//').should.be.exactly('/aaaa/');
         });
 
         it('removes forward slashes occurring at various places', function() {
-            formatter.removeRecuringSlashes('/aa///aa//').should.be.exactly('/aa/aa/');
+            formatter.path('/aa///aa//').should.be.exactly('/aa/aa/');
         });
     });
 
