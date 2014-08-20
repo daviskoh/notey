@@ -3,6 +3,7 @@
 'use strict';
 
 var path = require('path'),
-    lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib'),
+    fs = require('fs'),
+    lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
     // requiring the file executes module (see main.js)
     require(lib + '/main.js');
