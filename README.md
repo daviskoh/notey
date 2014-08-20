@@ -85,3 +85,13 @@ Examples:
 ```
 TODO: abstract into function
 ```
+
+## Development
+
+Notey is tested using [Mocha](https://github.com/visionmedia/mocha) and [ShouldJS](https://github.com/shouldjs/should.js)
+
+### Run Specs
+
+```
+$ mocha
+```
