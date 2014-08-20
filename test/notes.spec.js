@@ -162,7 +162,73 @@ describe('notes', function() {
 
             directoryName = 'multi-files-multi-dirs-multi-files';
 
+            var allFileNotes = [];
 
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file1Name),
+                formatter.line('TODO: fill w/ stuff', 22),
+                formatter.line('TODO: organize by feature not by functionality', 31)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file2Name),
+                formatter.line('TODO: add some markup', 8),
+                formatter.line('TODO: delete <p> tag', 9)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file3Name),
+                formatter.line('// TODO: rename main module', 3),
+                formatter.line('* TODO: add more headers and stuff', 13),
+                formatter.line("// TODO: change route to '/'", 24),
+                formatter.line('// TODO: make call to useful url', 30)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file4Name),
+                formatter.line('// TODO: add some bootstrapper logic', 9),
+                formatter.line('// TODO: do some things', 10)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file5Name),
+                formatter.line('/* TODO: add more dependencies & stuff */', 13),
+                formatter.line('// TODO: add some unnecessary vars', 14)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file6Name),
+                formatter.line('/* TODO: make this function take an argument */', 7),
+                formatter.line('// TODO: here is a todo', 16)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file7Name),
+                formatter.line('// TODO: remove', 17),
+                formatter.line('/* TODO: add some border-radius */', 22)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file8Name),
+                formatter.line('// TODO: add more fonts', 1),
+                formatter.line('TODO: remove font below', 5)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file9Name),
+                formatter.line('// TODO: change to blue', 6)
+            ].join('\n'));
+
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + file10Name),
+                formatter.line('// TODO: reduce to 80%', 5),
+                formatter.line('// TODO: make darker', 7)
+            ].join('\n'));
+
+            expectedFormat = allFileNotes.join('\n\n');
+            // notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
+            // console.log(expectedFormat);
+            // console.log(notes.allNotes(mockCWD + directoryName));
         });
     });
 });

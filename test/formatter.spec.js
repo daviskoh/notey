@@ -52,5 +52,24 @@ describe('formatter', function() {
 
             formatter.line(givenString, 11).should.be.exactly(expectedString);
         });
+
+        
+        it('ignores trailing comment marker in HTML', function() {
+            givenString = '<!-- TODO: do things -->',
+            expectedString = '  * [Line  21] [TODO] do things';
+
+            formatter.line(givenString, 21).should.be.exactly(expectedString);
+        });
+
+        it('ignores trailing comment marker in c-style languages', function() {
+            givenString = '/* TODO: do things */',
+            expectedString = '  * [Line  21] [TODO] do things';
+
+            formatter.line(givenString, 21).should.be.exactly(expectedString);
+        });
+
+        xit('allows for punctuation', function() {
+            
+        });
     });
 });
