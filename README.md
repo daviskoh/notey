@@ -60,7 +60,7 @@ User/person/dev/project/src/app/main-controller.spec.js:
   * [Line  33] [TODO] make expectation more dynamic
 ```
 
-## [Currently Supported Formats](id:formats)
+## <a name="formats">Currently Supported Formats</a>
 
 ### Known Supported Languages
 
