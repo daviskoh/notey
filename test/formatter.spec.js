@@ -12,6 +12,17 @@ describe('formatter', function() {
         formatter.should.be.type('object');
     });
 
+    describe('formatter.notes', function() {
+        it('prevents more than 2 line breaks', function() {
+            formatter.notes('hello\n\n\ndude').should.be.exactly('hello\n\ndude');
+        });
+
+        it('removes all prefacing & trailing whitespace', function() {
+            formatter.notes('\nhello\n').should.be.exactly('hello');
+            formatter.notes('\nhel\n\n\nlo\n').should.be.exactly('hel\n\nlo');
+        });
+    });
+
     describe('formatter.path', function() {
         var expected = '/aaaa/'
 
