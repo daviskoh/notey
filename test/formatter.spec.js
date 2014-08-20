@@ -12,6 +12,18 @@ describe('formatter', function() {
         formatter.should.be.type('object');
     });
 
+    describe('formatter.removeRecuringSlashes', function() {
+        var expected = '/aaaa/'
+
+        it('removes duplicate trialing forward slashes', function() {
+            formatter.removeRecuringSlashes('/aaaa//').should.be.exactly('/aaaa/');
+        });
+
+        it('removes forward slashes occurring at various places', function() {
+            formatter.removeRecuringSlashes('/aa///aa//').should.be.exactly('/aa/aa/');
+        });
+    });
+
     describe('formatter.header', function() {
         var header = 'my-file.js';
 
