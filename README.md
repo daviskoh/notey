@@ -62,6 +62,8 @@ User/person/dev/project/src/app/controllers/main-controller.spec.js:
 
 ## <a name="formats">Currently Supported Formats</a>
 
+Warning: **Only notes w/ a trailing ':' will be considered valid.**
+
 ### Known Supported Languages
 
 - C-Style Languages (C, JS, Go, Java, etc)
@@ -82,15 +84,30 @@ User/person/dev/project/src/app/controllers/main-controller.spec.js:
 
 Examples:
 
+**bad**
+
 ```
-TODO: abstract into function
+// todo: this is bad
+// Todo: this is bad
+// ToDo: this is bad
+// todo this is bad
+// TODO this is bad
+```
+**good**
+
+```
+// TODO: abstract into function
+
+/**
+ * TODO: change to camelCase
+ */
 ```
 
 ## Development
 
 Notey is tested using [Mocha](https://github.com/visionmedia/mocha) and [ShouldJS](https://github.com/shouldjs/should.js)
 
-### Run Specs
+### Run All Specs
 
 ```
 $ mocha
