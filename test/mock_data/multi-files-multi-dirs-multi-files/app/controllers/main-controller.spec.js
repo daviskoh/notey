@@ -4,7 +4,8 @@ describe('MeowCtrl', function() {
     var $scope,
         things = ['hello', 'meow'];
 
-    function doStuff() /* TODO: make this function take an argument */ {
+    /* TODO: make this function take an argument */ 
+    function doStuff() {
         console.log('meow');
     }
 

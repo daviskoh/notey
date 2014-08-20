@@ -10,7 +10,8 @@ angular.module('myMod.controllers', [])
  * @requires $scope
  */
 
-.component('MeowCtrl', function ($scope, apiResp) /* TODO: add more dependencies & stuff */ {
+/* TODO: add more dependencies & stuff */
+.component('MeowCtrl', function ($scope, apiResp) {
     // TODO: add some unnecessary vars
     $scope.things = apiResp;
 });
