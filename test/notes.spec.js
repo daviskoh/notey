@@ -148,87 +148,96 @@ describe('notes', function() {
 
         // TODO: look into generating test dirs & files randomly using yeoman generator
         // manually inputting all TODOs
-        xit('should handle a directory with multiple files & multiple directories that contain multiple files', function() {
-            var file1Name = 'index.html',
-                file2Name = 'useless.html',
-                file3Name = 'app/app.js',
-                file4Name = 'app/init.js',
-                file5Name = 'app/controller/main-controller.js',
-                file6Name = 'app/controller/main-controller.spec.js',
-                file7Name = 'app/styles/core.scss',
-                file8Name = 'app/styles/_another-external.scss',
-                file9Name = 'app/styles/_external.scss',
-                file10Name = 'app/styles/coolness/coolness.scss';
+        it('should handle a directory with multiple files & multiple directories that contain multiple files', function() {
+            var appJS = 'app/app.js',
+                mainCtrl = 'app/controllers/main-controller.js',
+                mainCtrlSpec = 'app/controllers/main-controller.spec.js',
+                initJS = 'app/init.js',
+                indexHTML = 'index.html',
+                another = 'styles/_another-external.scss',
+                external = 'styles/_external.scss',
+                coolness = 'styles/coolness/coolness.scss',
+                core = 'styles/core.scss',
+                useless = 'useless.html';
 
-            directoryName = 'multi-files-multi-dirs-multi-files';
+            directoryName = 'multi-files-multi-dirs-multi-files/';
 
             var allFileNotes = [];
 
+            // app.js
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file1Name),
-                formatter.line('TODO: fill w/ stuff', 22),
-                formatter.line('TODO: organize by feature not by functionality', 31)
-            ].join('\n'));
-
-            allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file2Name),
-                formatter.line('TODO: add some markup', 8),
-                formatter.line('TODO: delete <p> tag', 9)
-            ].join('\n'));
-
-            allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file3Name),
+                formatter.header(mockCWD + directoryName + appJS),
                 formatter.line('// TODO: rename main module', 3),
                 formatter.line('* TODO: add more headers and stuff', 13),
                 formatter.line("// TODO: change route to '/'", 24),
                 formatter.line('// TODO: make call to useful url', 30)
             ].join('\n'));
 
+            // main-controller.js
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file4Name),
+                formatter.header(mockCWD + directoryName + mainCtrl),
+                formatter.line('/* TODO: add more dependencies & stuff */', 13),
+                formatter.line('// TODO: add some unnecessary vars', 15)
+            ].join('\n'));
+
+            // main-controller.spec.js
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + mainCtrlSpec),
+                formatter.line('/* TODO: make this function take an argument */', 7),
+                formatter.line('// TODO: here is a todo', 17)
+            ].join('\n'));
+
+            // init.js
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + initJS),
                 formatter.line('// TODO: add some bootstrapper logic', 9),
                 formatter.line('// TODO: do some things', 10)
             ].join('\n'));
 
+            // index.html
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file5Name),
-                formatter.line('/* TODO: add more dependencies & stuff */', 13),
-                formatter.line('// TODO: add some unnecessary vars', 14)
+                formatter.header(mockCWD + directoryName + indexHTML),
+                formatter.line('TODO: fill w/ stuff', 22),
+                formatter.line('TODO: organize by feature not by functionality', 33)
             ].join('\n'));
 
+            // _another-external.scss
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file6Name),
-                formatter.line('/* TODO: make this function take an argument */', 7),
-                formatter.line('// TODO: here is a todo', 16)
-            ].join('\n'));
-
-            allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file7Name),
-                formatter.line('// TODO: remove', 17),
-                formatter.line('/* TODO: add some border-radius */', 22)
-            ].join('\n'));
-
-            allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file8Name),
+                formatter.header(mockCWD + directoryName + another),
                 formatter.line('// TODO: add more fonts', 1),
                 formatter.line('TODO: remove font below', 5)
             ].join('\n'));
 
+            // _external.scss
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file9Name),
+                formatter.header(mockCWD + directoryName + external),
                 formatter.line('// TODO: change to blue', 6)
             ].join('\n'));
 
+            // coolness.scss
             allFileNotes.push([
-                formatter.header(mockCWD + directoryName + file10Name),
+                formatter.header(mockCWD + directoryName + coolness),
                 formatter.line('// TODO: reduce to 80%', 5),
                 formatter.line('// TODO: make darker', 7)
             ].join('\n'));
 
+            // core.scss
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + core),
+                formatter.line('// TODO: remove', 17),
+                formatter.line('/* TODO: add some border-radius */', 22)
+            ].join('\n'));
+
+            // useless.html
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + useless),
+                formatter.line('TODO: add some markup', 8),
+                formatter.line('TODO: delete <p> tag', 9)
+            ].join('\n'));
+
             expectedFormat = allFileNotes.join('\n\n');
-            // notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
-            // console.log(expectedFormat);
-            // console.log(notes.allNotes(mockCWD + directoryName));
+
+            notes.allNotes(mockCWD + directoryName).should.be.eql(expectedFormat);
         });
     });
 });
