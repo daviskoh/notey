@@ -1,6 +1,7 @@
 'use strict';
 
 var formatter = require('../lib/formatter'),
+    keyWords = require('../resources/key-words.json'),
     should = require('should');
 
 describe('formatter', function() {
@@ -35,6 +36,20 @@ describe('formatter', function() {
         });
     });
 
+    describe('formatter.regex', function() {
+        it('combines strings into regex a or statement', function() {
+            formatter.regex('hello', 'dude').should.match(RegExp('hello|dude'));
+        });
+
+        it('takes an infinite number of arguments', function() {
+            var testStrings = ['dude'];
+            for (var i = 0; i < 10; i++) {
+                testStrings.push(i.toString());
+                formatter.regex.apply(null, testStrings).should.match(RegExp(testStrings.join('|')));
+            }
+        });
+    });
+
     describe('formatter.header', function() {
         var header = 'my-file.js';
 
@@ -46,6 +61,7 @@ describe('formatter', function() {
             formatter.header(header).should.be.exactly(header + ':');
         });
 
+        // TODO: move forward slash checking to formatter.path
         it('should remove any duplicate forward slashes', function() {
             var expected = 'directory/ello-dude/homie/bro.js:';
 
@@ -62,43 +78,45 @@ describe('formatter', function() {
             formatter.line.should.be.type('function');
         });
 
-        it('formats a string properly given a line number', function() {
-            givenString = 'TODO: update client-side Session model to overwrite toJSON',
-            expectedString = '  * [Line   8] [TODO] update client-side Session model to overwrite toJSON';
+        Object.keys(keyWords).forEach(function(noteType) {
+            it('formats a ' + keyWords[noteType] +' properly given a line number', function() {
+                givenString = keyWords[noteType] + ': update client-side Session model to overwrite toJSON',
+                expectedString = '  * [Line   8] [' + keyWords[noteType] +'] update client-side Session model to overwrite toJSON';
 
-            formatter.line(givenString, 8).should.be.exactly(expectedString);
-        });
+                formatter.line(givenString, 8).should.be.exactly(expectedString);
+            });
 
-        it('ignores code prefacing code', function() {
-            givenString = '[1, 2, 3].forEach(function(number) { // TODO: declare new var & replace hard-coded',
-            expectedString = '  * [Line  11] [TODO] declare new var & replace hard-coded';
+            it('ignores code prefacing a ' + keyWords[noteType], function() {
+                givenString = '[1, 2, 3].forEach(function(number) { // ' + keyWords[noteType] + ': declare new var & replace hard-coded',
+                expectedString = '  * [Line  11] [' + keyWords[noteType] + '] declare new var & replace hard-coded';
 
-            formatter.line(givenString, 11).should.be.exactly(expectedString);
-        });
+                formatter.line(givenString, 11).should.be.exactly(expectedString);
+            });
 
-        it('ignores trailing comment marker in HTML', function() {
-            givenString = '<!-- TODO: do things -->',
-            expectedString = '  * [Line  21] [TODO] do things';
+            it('ignores trailing comment marker in HTML ' + keyWords[noteType], function() {
+                givenString = '<!-- ' + keyWords[noteType] +': do things -->',
+                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] do things';
 
-            formatter.line(givenString, 21).should.be.exactly(expectedString);
-            // ignores trailing whitespace
-            formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
-        });
+                formatter.line(givenString, 21).should.be.exactly(expectedString);
+                // ignores trailing whitespace
+                formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
+            });
 
-        it('ignores trailing comment marker in c-style languages', function() {
-            givenString = '/* TODO: do things */',
-            expectedString = '  * [Line  21] [TODO] do things';
+            it('ignores trailing comment marker in c-style language ' + keyWords[noteType] + 's', function() {
+                givenString = '/* ' + keyWords[noteType] + ': do things */',
+                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] do things';
 
-            formatter.line(givenString, 21).should.be.exactly(expectedString);
-            // ignores trailing whitespace
-            formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
-        });
+                formatter.line(givenString, 21).should.be.exactly(expectedString);
+                // ignores trailing whitespace
+                formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
+            });
 
-        it('allows for punctuation', function() {
-            givenString = '<!-- TODO: hey there! -->',
-            expectedString = '  * [Line  21] [TODO] hey there!';
+            it('allows for punctuation in a ' + keyWords[noteType], function() {
+                givenString = '<!-- ' + keyWords[noteType] + ': hey there! -->',
+                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] hey there!';
 
-            formatter.line(givenString, 21).should.be.exactly(expectedString);
+                formatter.line(givenString, 21).should.be.exactly(expectedString);
+            });
         });
     });
 });
