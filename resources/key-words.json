@@ -1,3 +1,5 @@
 {
-    "todo": "TODO"
+    "todo": "TODO",
+    "fixme": "FIXME",
+    "optimize": "OPTIMIZE"
 }

@@ -36,16 +36,17 @@ describe('formatter', function() {
         });
     });
 
+    // TODO: find valid regex checker
     describe('formatter.regex', function() {
-        it('combines strings into regex a or statement', function() {
-            formatter.regex('hello', 'dude').should.match(RegExp('hello|dude'));
+        it('combines strings in an array into a regex or statement', function() {
+            formatter.regex(['hello', 'dude']).should.match(RegExp('hello:|dude:'));
         });
 
         it('takes an infinite number of arguments', function() {
             var testStrings = ['dude'];
             for (var i = 0; i < 10; i++) {
                 testStrings.push(i.toString());
-                formatter.regex.apply(null, testStrings).should.match(RegExp(testStrings.join('|')));
+                formatter.regex(testStrings).should.match(RegExp(testStrings.join(':|') + ':'));
             }
         });
     });
