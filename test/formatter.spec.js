@@ -25,14 +25,20 @@ describe('formatter', function() {
     });
 
     describe('formatter.path', function() {
-        var expected = '/aaaa/'
-
-        it('removes duplicate trialing forward slashes', function() {
+        it('removes duplicate trailing forward slashes', function() {
             formatter.path('/aaaa//').should.be.exactly('/aaaa/');
         });
 
         it('removes forward slashes occurring at various places', function() {
             formatter.path('/aa///aa//').should.be.exactly('/aa/aa/');
+        });
+
+        it('should remove any duplicate forward slashes from file path', function() {
+            var expected = 'directory/ello-dude/homie/bro.js';
+
+            formatter.path('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
+            formatter.path('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
+            formatter.path('directory//ello-dude////homie/bro.js').should.be.exactly(expected);
         });
     });
 
@@ -58,17 +64,8 @@ describe('formatter', function() {
             formatter.header.should.be.type('function');
         });
 
-        it('should format a header', function() {
+        it('should add a trailing colon', function() {
             formatter.header(header).should.be.exactly(header + ':');
-        });
-
-        // TODO: move forward slash checking to formatter.path
-        it('should remove any duplicate forward slashes', function() {
-            var expected = 'directory/ello-dude/homie/bro.js:';
-
-            formatter.header('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
-            formatter.header('directory//ello-dude/homie///bro.js').should.be.exactly(expected);
-            formatter.header('directory//ello-dude////homie/bro.js').should.be.exactly(expected);
         });
     });
 
