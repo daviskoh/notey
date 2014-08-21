@@ -1,5 +1,7 @@
+// FIXME: use css class
 div {
     & p {
+        // OPTIMIZE: store in var
         padding: 30px;
     }
 

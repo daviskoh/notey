@@ -74,13 +74,8 @@ Warning: **Only notes w/ a trailing ':' will be considered valid.**
 ### Note Types
 
 - TODO
-
-**Future**:
-
 - FIXME
 - OPTIMIZE
-
-**Note**: **Testing** is being done for the other note types. Thus, **TODO** is the only tested and supported type.
 
 Examples:
 
@@ -92,15 +87,33 @@ Examples:
 // ToDo: this is bad
 // todo this is bad
 // TODO this is bad
+
+// fixme: this is bad
+// Fixme: this is bad
+// FixMe: this is bad
+// fixme this is bad
+// FIXME this is bad
+
+// optimize: this is bad
+// Optimize: this is bad
+// OptiMize: this is bad
+// optimize this is bad
+// OPTIMIZE this is bad
 ```
 **good**
 
 ```
 // TODO: abstract into function
+// FIXME: change type
+// OPTIMIZE: sorting algorithm
 
 /**
  * TODO: change to camelCase
  */
+
+ <!-- FIXME: add href -->
+
+/* OPTIMIZE: things */
 ```
 
 ## Development

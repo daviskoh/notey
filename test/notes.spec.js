@@ -157,7 +157,8 @@ describe('notes', function() {
                 external = 'styles/_external.scss',
                 coolness = 'styles/coolness/coolness.scss',
                 core = 'styles/core.scss',
-                useless = 'useless.html';
+                useless = 'useless.html',
+                zsh = 'zsh.html';
 
             directoryName = 'multi-files-multi-dirs-multi-files/';
 
@@ -169,7 +170,8 @@ describe('notes', function() {
                 formatter.line('// TODO: rename main module', 3),
                 formatter.line('* TODO: add more headers and stuff', 13),
                 formatter.line("// TODO: change route to '/'", 24),
-                formatter.line('// TODO: make call to useful url', 30)
+                formatter.line('// TODO: make call to useful url', 30),
+                formatter.line("FIXME: should redirect to '/' not '/main'", 40)
             ].join('\n'));
 
             // main-controller.js
@@ -183,7 +185,8 @@ describe('notes', function() {
             allFileNotes.push([
                 formatter.header(mockCWD + directoryName + mainCtrlSpec),
                 formatter.line('/* TODO: make this function take an argument */', 7),
-                formatter.line('// TODO: here is a todo', 17)
+                formatter.line('// TODO: here is a todo', 17),
+                formatter.line('/* OPTIMIZE: some things */', 29)
             ].join('\n'));
 
             // init.js
@@ -197,7 +200,8 @@ describe('notes', function() {
             allFileNotes.push([
                 formatter.header(mockCWD + directoryName + indexHTML),
                 formatter.line('TODO: fill w/ stuff', 22),
-                formatter.line('TODO: organize by feature not by functionality', 33)
+                formatter.line('<!-- OPTIMIZE: build -->', 25),
+                formatter.line('TODO: organize by feature not by functionality', 34)
             ].join('\n'));
 
             // _another-external.scss
@@ -210,14 +214,17 @@ describe('notes', function() {
             // _external.scss
             allFileNotes.push([
                 formatter.header(mockCWD + directoryName + external),
-                formatter.line('// TODO: change to blue', 6)
+                formatter.line('// FIXME: use css class', 1),
+                formatter.line('// OPTIMIZE: store in var', 4),
+                formatter.line('// TODO: change to blue', 8)
             ].join('\n'));
 
             // coolness.scss
             allFileNotes.push([
                 formatter.header(mockCWD + directoryName + coolness),
                 formatter.line('// TODO: reduce to 80%', 5),
-                formatter.line('// TODO: make darker', 7)
+                formatter.line('// FIXME: use darken', 7),
+                formatter.line('// TODO: make darker', 8)
             ].join('\n'));
 
             // core.scss
@@ -230,8 +237,17 @@ describe('notes', function() {
             // useless.html
             allFileNotes.push([
                 formatter.header(mockCWD + directoryName + useless),
-                formatter.line('TODO: add some markup', 8),
-                formatter.line('TODO: delete <p> tag', 9)
+                formatter.line('<!-- FIXME: humanize title -->', 5),
+                formatter.line('<!-- OPTIMIZE: some things -->', 8),
+                formatter.line('TODO: add some markup', 10),
+                formatter.line('TODO: delete <p> tag', 11)
+            ].join('\n'));
+
+            // zsh.html
+            allFileNotes.push([
+                formatter.header(mockCWD + directoryName + zsh),
+                formatter.line('FIXME: use bootstrap to adjust width', 2),
+                formatter.line('OPTIMIZE: use iterating not copy paste', 8)
             ].join('\n'));
 
             expectedFormat = allFileNotes.join('\n\n');

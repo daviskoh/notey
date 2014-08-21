@@ -4,7 +4,7 @@ describe('MeowCtrl', function() {
     var $scope,
         things = ['hello', 'meow'];
 
-    /* TODO: make this function take an argument */ 
+    /* TODO: make this function take an argument */
     function doStuff() {
         console.log('meow');
     }
@@ -16,7 +16,7 @@ describe('MeowCtrl', function() {
 
         ctrl = $controller('MeowCtrl', { // TODO: here is a todo
             $scope: $scope,
-            apiResp: (function () {
+            apiResp: (function() {
                 return {
                     data: {
                         stuff: things
@@ -26,7 +26,8 @@ describe('MeowCtrl', function() {
         });
     }));
 
-    it('should exist', function () {
+    /* OPTIMIZE: some things */
+    it('should exist', function() {
         expect(ctrl).toBeTruthy();
     });
 

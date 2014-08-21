@@ -37,6 +37,7 @@ angular.module('myMod', [
 
     // Fallback
     .otherwise({
+        // FIXME: should redirect to '/' not '/main'
         redirectTo: '/main'
     });
 });
