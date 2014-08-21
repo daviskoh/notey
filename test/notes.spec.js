@@ -30,6 +30,12 @@ describe('notes', function() {
             notes.containsNote('function doThangs() { // todo: ello').should.be.false;
             notes.containsNote('function doThangs() { // Todo: ello').should.be.false;
         });
+
+        it('does not allow note to have trailing colon', function() {
+            notes.containsNote('// TODO fix this').should.be.false;
+            notes.containsNote('// FIXME fix this').should.be.false;
+            notes.containsNote('// OPTIMIZE fix this').should.be.false;
+        });
     });
 
     describe('notes.retrieveTodos', function() {
