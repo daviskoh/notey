@@ -42,17 +42,25 @@ describe('formatter', function() {
         });
     });
 
-    // TODO: find valid regex checker
     describe('formatter.regex', function() {
-        it('combines strings in an array into a regex or statement', function() {
-            formatter.regex(['hello', 'dude']).should.match(RegExp('hello:|dude:'));
+        // needed as regular equality check is not possible w/ regex
+        function regexValidate(x, y) {
+            return (x instanceof RegExp) && (y instanceof RegExp) &&
+                (x.source === y.source) && (x.global === y.global) &&
+                (x.ignoreCase === y.ignoreCase) && (x.multiline === y.multiline);
+        }
+
+        it('combines an array of strings into a regex or statement', function() {
+            // formatter.regex(['hello', 'dude']).should.match(RegExp('hello:|dude:'));
+            regexValidate(formatter.regex(['hello', 'dude']), RegExp('hello:|dude:')).should.be.true;
         });
 
         it('takes an infinite number of arguments', function() {
-            var testStrings = ['dude'];
+            var testStrings = ['dude'],
+                expectedRegExp = RegExp(testStrings.join(':|') + ':');
             for (var i = 0; i < 10; i++) {
                 testStrings.push(i.toString());
-                formatter.regex(testStrings).should.match(RegExp(testStrings.join(':|') + ':'));
+                regexValidate(formatter.regex(testStrings), expectedRegExp);
             }
         });
     });
