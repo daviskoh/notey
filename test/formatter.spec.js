@@ -51,7 +51,6 @@ describe('formatter', function() {
         }
 
         it('combines an array of strings into a regex or statement', function() {
-            // formatter.regex(['hello', 'dude']).should.match(RegExp('hello:|dude:'));
             regexValidate(formatter.regex(['hello', 'dude']), RegExp('hello:|dude:')).should.be.true;
         });
 
