@@ -1,6 +1,6 @@
 {
   "name": "notey",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Note tracker command line utility inspired by Rails Rake Notes",
   "main": "./lib/main",
   "bin": {
