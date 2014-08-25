@@ -13,6 +13,16 @@ Notey is a nodejs command line utility inspired by the notes rake task available
 $ npm install -g notey
 ```
 
+## Updates
+
+Notey now supports **color** with version **0.0.6**!
+
+Green for line numbers - Line <font color="green">8</font>  
+Yellow for TODOs - <font color="yellow">TODO</font>  
+Cyan for OPTIMIZEs - <font color="cyan">OPTIMIZE</font>  
+Red for FIXMEs - <font color="red">FIXME</font>  
+
+
 ## Usage
 
 Notey accepts an infinite number of directories & files to look inside. When called by itself with no arguments, it will default to the **current working directory**.
