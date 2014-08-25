@@ -30,5 +30,8 @@
   "devDependencies": {
     "mocha": "^1.21.4",
     "should": "^4.0.4"
+  },
+  "dependencies": {
+    "chalk": "^0.5.1"
   }
 }

@@ -1,7 +1,8 @@
 'use strict';
 
 var formatter = require('../lib/formatter'),
-    keyWords = require('../resources/key-words.json'),
+    noteTypes = require('../resources/note-types.json'),
+    chalk = require('chalk'),
     should = require('should');
 
 describe('formatter', function() {
@@ -72,53 +73,59 @@ describe('formatter', function() {
         });
 
         it('should add a trailing colon', function() {
-            formatter.header(header).should.be.exactly(header + ':');
+            formatter.header(header).should.be.exactly(chalk.bold(header) + ':');
         });
     });
 
     describe('formatter.line', function() {
         var givenString, expectedString;
 
+        function toThreeDigits(number) {
+            return ('   ' + number).toString().substr(-3)
+        }
+
         it('is a function', function() {
             formatter.line.should.be.type('function');
         });
 
-        Object.keys(keyWords).forEach(function(noteType) {
-            it('formats a ' + keyWords[noteType] +' properly given a line number', function() {
-                givenString = keyWords[noteType] + ': update client-side Session model to overwrite toJSON',
-                expectedString = '  * [Line   8] [' + keyWords[noteType] +'] update client-side Session model to overwrite toJSON';
+        Object.keys(noteTypes).forEach(function(noteType) {
+            var noteObject = noteTypes[noteType];
+
+            it('formats a ' + noteObject.note +' properly given a line number', function() {
+                givenString = noteObject.note + ': update client-side Session model to overwrite toJSON',
+                expectedString = '  * [Line ' + chalk.green(toThreeDigits(8)) + '] [' + chalk[noteObject.color](noteObject.note) +'] update client-side Session model to overwrite toJSON';
 
                 formatter.line(givenString, 8).should.be.exactly(expectedString);
             });
 
-            it('ignores code prefacing a ' + keyWords[noteType], function() {
-                givenString = '[1, 2, 3].forEach(function(number) { // ' + keyWords[noteType] + ': declare new var & replace hard-coded',
-                expectedString = '  * [Line  11] [' + keyWords[noteType] + '] declare new var & replace hard-coded';
+            it('ignores code prefacing a ' + noteObject.note, function() {
+                givenString = '[1, 2, 3].forEach(function(number) { // ' + noteObject.note + ': declare new var & replace hard-coded',
+                expectedString = '  * [Line ' + chalk.green(toThreeDigits(11)) + '] [' + chalk[noteObject.color](noteObject.note) + '] declare new var & replace hard-coded';
 
                 formatter.line(givenString, 11).should.be.exactly(expectedString);
             });
 
-            it('ignores trailing comment marker in HTML ' + keyWords[noteType], function() {
-                givenString = '<!-- ' + keyWords[noteType] +': do things -->',
-                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] do things';
+            it('ignores trailing comment marker in HTML ' + noteObject.note, function() {
+                givenString = '<!-- ' + noteObject.note +': do things -->',
+                expectedString = '  * [Line ' + chalk.green(toThreeDigits(21)) + '] [' + chalk[noteObject.color](noteObject.note) + '] do things';
 
                 formatter.line(givenString, 21).should.be.exactly(expectedString);
                 // ignores trailing whitespace
                 formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
             });
 
-            it('ignores trailing comment marker in c-style language ' + keyWords[noteType] + 's', function() {
-                givenString = '/* ' + keyWords[noteType] + ': do things */',
-                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] do things';
+            it('ignores trailing comment marker in c-style language ' + noteObject.note + 's', function() {
+                givenString = '/* ' + noteObject.note + ': do things */',
+                expectedString = '  * [Line ' + chalk.green(toThreeDigits(21)) + '] [' + chalk[noteObject.color](noteObject.note) + '] do things';
 
                 formatter.line(givenString, 21).should.be.exactly(expectedString);
                 // ignores trailing whitespace
                 formatter.line(givenString + ' ', 21).should.be.exactly(expectedString);
             });
 
-            it('allows for punctuation in a ' + keyWords[noteType], function() {
-                givenString = '<!-- ' + keyWords[noteType] + ': hey there! -->',
-                expectedString = '  * [Line  21] [' + keyWords[noteType] + '] hey there!';
+            it('allows for punctuation in a ' + noteObject.note, function() {
+                givenString = '<!-- ' + noteObject.note + ': hey there! -->',
+                expectedString = '  * [Line ' + chalk.green(toThreeDigits(21)) + '] [' + chalk[noteObject.color](noteObject.note) + '] hey there!';
 
                 formatter.line(givenString, 21).should.be.exactly(expectedString);
             });

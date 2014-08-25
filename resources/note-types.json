@@ -1,0 +1,14 @@
+{
+    "todo": {
+        "note": "TODO",
+        "color": "yellow"
+    },
+    "fixme": {
+        "note": "FIXME",
+        "color": "red"
+    },
+    "optimize": {
+        "note": "OPTIMIZE",
+        "color": "cyan"
+    }
+}
