@@ -38,20 +38,20 @@ describe('notes', function() {
         });
     });
 
-    describe('notes.retrieveTodos', function() {
+    describe('notes.retrieveNotes', function() {
         var fileName = 'sample-file.go',
             header = formatter.header(mockCWD + fileName),
             todo1 = formatter.line('// TODO: add arg & return it', 7),
             todo2 = formatter.line('// TODO: add more things', 14);
 
         it('is a function', function() {
-            notes.retrieveTodos.should.be.type('function');
+            notes.retrieveNotes.should.be.type('function');
         });
 
         it('should take a file and return an array of only valid TODOs', function() {
             var expectedTodos = [todo1, todo2];
 
-            notes.retrieveTodos(mockCWD + fileName).should.eql(expectedTodos);
+            notes.retrieveNotes(mockCWD + fileName).should.eql(expectedTodos);
         });
     });
 
