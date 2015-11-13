@@ -1,4 +1,4 @@
-# Notey
+# Notey [![Build Status](https://travis-ci.org/daviskoh/notey.svg?branch=master)](https://travis-ci.org/daviskoh/notey)
 =====
 
 [NodeJS](http://nodejs.org/) Note tracker command line utility inspired by [Rails](http://rubyonrails.org/) Rake Notes
